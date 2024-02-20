@@ -17,6 +17,10 @@ class Game():
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    position = pygame.mouse.get_pos()
+                    rightClick = pygame.mouse.get_pressed()[2]
+                    self.handleClicl(position, rightClick)
             self.draw()
             pygame.display.flip()
         pygame.quit()
@@ -48,8 +52,12 @@ class Game():
         if (piece.getClicked()):
             pass
         else:
-            string = "empty-block"
+            string = "flag" if piece.getFlagged() else "empty-block"
         return self.images[string]
     
+    def handleClicl(self, position, rightClick):
+        index = position[1]//self.pieceSize[1], position[0]//self.pieceSize[0]
+        piece = self.board.getPiece(index)
+        self.board.handleClick(piece, rightClick)
 
 

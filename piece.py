@@ -26,3 +26,8 @@ class Piece():
     def getNumAround(self):
         return self.numAround
     
+    def toggleflag(self):
+        self.flagged = not self.flagged
+
+    def click(self):
+        self.clicked = True
